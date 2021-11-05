@@ -1,9 +1,10 @@
 <?php
 /**
  * User Switching plugin for WordPress
+ * Modified to allow activation on a single site in a Multisite environment
  *
  * @package   user-switching
- * @link      https://github.com/johnbillion/user-switching
+ * @link      https://github.com/Hive-IT-GmbH/user-switching/
  * @author    John Blackbourn <john@johnblackbourn.com>
  * @copyright 2009-2021 John Blackbourn
  * @license   GPL v2 or later
@@ -16,7 +17,6 @@
  * Author URI:   https://github.com/johnbillion/user-switching/graphs/contributors
  * Text Domain:  user-switching
  * Domain Path:  /languages/
- * Network:      true
  * Requires PHP: 5.3
  *
  * This program is free software; you can redistribute it and/or modify
