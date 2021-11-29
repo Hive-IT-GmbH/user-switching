@@ -1,3 +1,5 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow
+
 name: Functional Tests
 on:
   push:
@@ -8,6 +10,7 @@ on:
     paths:
       - '.github/workflows/e2e.yml'
       - 'behat.yml'
+      - 'bin/test.sh'
       - 'composer.json'
       - 'features/**'
       - 'user-switching.php'
@@ -17,6 +20,7 @@ on:
     paths:
       - '.github/workflows/e2e.yml'
       - 'behat.yml'
+      - 'bin/test.sh'
       - 'composer.json'
       - 'features/**'
       - 'user-switching.php'
@@ -29,7 +33,7 @@ jobs:
   build:
     strategy:
       matrix:
-        php: ['7.3','8.0']
+        php: ['7.4']
         wp: ['*', 'dev-nightly']
       fail-fast: false
     name: WP ${{ matrix.wp }} / PHP ${{ matrix.php }}
@@ -55,8 +59,8 @@ jobs:
       uses: shivammathur/setup-php@2.7.0
       with:
         php-version: ${{ matrix.php }}
-        extensions: mysqli, xmlwriter
-        coverage: none
+        extensions: mysqli, xmlwriter, xdebug
+        ini-values: xdebug.mode="develop"
       env:
         fail-fast: true
 
@@ -70,11 +74,10 @@ jobs:
     - name: Install dependencies
       run: |
         sudo systemctl start mysql.service
-        composer install --prefer-dist --ignore-platform-reqs
-        composer require --dev --update-with-dependencies --prefer-dist --ignore-platform-reqs roots/wordpress="${{ matrix.wp }} || *"
+        composer install --prefer-dist
+        composer require --dev --update-with-dependencies --prefer-dist roots/wordpress="${{ matrix.wp }} || *"
 
     - name: Run the tests
       run: composer test:ft
       env:
-        MYSQL_DATABASE: wordpress
         WP_TESTS_DB_PASS: root

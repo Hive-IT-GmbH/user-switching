@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# -e          Exit immediately if a pipeline returns a non-zero status
+# -o pipefail Produce a failure return code if any command errors
+set -eo pipefail
+
 # Specify the directory where the WordPress installation lives:
 WP_CORE_DIR="${PWD}/tests/wordpress"
 
@@ -23,8 +27,9 @@ $WP language core install it_IT
 $WP language plugin install user-switching it_IT
 
 # Run the functional tests:
-BEHAT_PARAMS='{"extensions" : {"PaulGibbs\\WordpressBehatExtension" : {"path" : "'$WP_CORE_DIR'"}}}' \
-	./vendor/bin/behat --colors "$1"
+BEHAT_PARAMS='{"extensions" : {"WordHat\\Extension" : {"path" : "'$WP_CORE_DIR'"}}}' \
+	./vendor/bin/behat --colors --strict "$1" \
+	|| BEHAT_EXIT_CODE=$? && kill $! && exit $BEHAT_EXIT_CODE
 
 # Stop the PHP web server:
 kill $!

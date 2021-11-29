@@ -1,3 +1,5 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow
+
 name: Unit Tests
 on:
   push:
@@ -76,5 +78,4 @@ jobs:
     - name: Run the tests
       run: composer test:ut
       env:
-        MYSQL_DATABASE: wordpress
         WP_TESTS_DB_PASS: root

@@ -4,15 +4,15 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ElementHtmlException;
 use Behat\Mink\Exception\ElementTextException;
 use Behat\Mink\Exception\ExpectationException;
-use PaulGibbs\WordpressBehatExtension\Context\RawWordpressContext as WordPressContext;
-use PaulGibbs\WordpressBehatExtension\Context\Traits\UserAwareContextTrait as UserContext;
+use WordHat\Extension\Context\RawWordpressContext as WordPressContext;
+use WordHat\Extension\Context\Traits\UserAwareContextTrait as UserContext;
 use PHPUnit\Framework\Assert;
 
 /**
  * Defines application features from the specific context.
  */
 class UserSwitchingContext extends WordPressContext {
-    use UserContext;
+	use UserContext;
 
 	/**
 	 * Switch to the specified user
@@ -131,8 +131,8 @@ class UserSwitchingContext extends WordPressContext {
 	 * @Then /^the page language should be "(?P<lang>[^"]+)"$/
 	 *
 	 * @throws ElementHtmlException If the language is incorrect.
-     */
-    public function thePageLanguageShouldBe( $lang ) {
+	 */
+	public function thePageLanguageShouldBe( $lang ) {
 		$this->theElementLanguageShouldBe( 'html', $lang );
 	}
 
@@ -145,8 +145,8 @@ class UserSwitchingContext extends WordPressContext {
 	 * @Then /^the "(?P<selector>[^"]+)" element language should be "(?P<lang>[^"]+)"$/
 	 *
 	 * @throws ElementHtmlException If the language is incorrect.
-     */
-    public function theElementLanguageShouldBe( $selector, $lang ) {
+	 */
+	public function theElementLanguageShouldBe( $selector, $lang ) {
 		$browser  = $this->getSession();
 		$element  = $browser->getPage()->find( 'css', $selector );
 
@@ -170,5 +170,5 @@ class UserSwitchingContext extends WordPressContext {
 				$element
 			);
 		}
-    }
+	}
 }
