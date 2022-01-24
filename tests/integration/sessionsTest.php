@@ -2,12 +2,17 @@
 
 declare(strict_types = 1);
 
-class TestSessions extends User_Switching_Test {
+namespace UserSwitching\Tests;
+
+use user_switching;
+use WP_Session_Tokens;
+
+class Sessions extends Test {
 
 	/**
 	 * @covers \switch_to_user
 	 */
-	public function testExtraSessionsAreNotCreatedForUsersWhenSwitching() : void {
+	public function testExtraSessionsAreNotCreatedForUsersWhenSwitching() {
 		if ( is_multisite() ) {
 			$admin = self::$testers['super'];
 		} else {
@@ -44,7 +49,7 @@ class TestSessions extends User_Switching_Test {
 	/**
 	 * @covers \switch_off_user
 	 */
-	public function testExtraSessionsAreNotCreatedForUserWhenSwitchingOff() : void {
+	public function testExtraSessionsAreNotCreatedForUserWhenSwitchingOff() {
 		if ( is_multisite() ) {
 			$admin = self::$testers['super'];
 		} else {
@@ -74,7 +79,7 @@ class TestSessions extends User_Switching_Test {
 	 * @covers \switch_to_user
 	 * @covers \switch_off_user
 	 */
-	public function testPreviousSessionForUserIsReusedWhenSwitchingBack() : void {
+	public function testPreviousSessionForUserIsReusedWhenSwitchingBack() {
 		if ( is_multisite() ) {
 			$admin = self::$testers['super'];
 		} else {
@@ -127,7 +132,7 @@ class TestSessions extends User_Switching_Test {
 	/**
 	 * @covers \switch_to_user
 	 */
-	public function testExpiredSessionPreventsUserFromSwitchingBack() : void {
+	public function testExpiredSessionPreventsUserFromSwitchingBack() {
 		if ( is_multisite() ) {
 			$admin = self::$testers['super'];
 		} else {
@@ -183,7 +188,7 @@ class TestSessions extends User_Switching_Test {
 	 * @covers \switch_to_user
 	 * @covers \switch_off_user
 	 */
-	public function testSessionTokensAreCorrectlyReusedWhenSwitching() : void {
+	public function testSessionTokensAreCorrectlyReusedWhenSwitching() {
 		if ( is_multisite() ) {
 			$admin = self::$testers['super'];
 		} else {

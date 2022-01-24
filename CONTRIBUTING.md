@@ -36,7 +36,7 @@ You can clone this repo and activate it like a normal WordPress plugin. If you w
 
 * [Composer](https://getcomposer.org/)
 * [Node](https://nodejs.org/)
-* A local web server running WordPress
+* A local installation of MariaDB or MySQL
 
 ### Setup
 
@@ -54,25 +54,25 @@ You can clone this repo and activate it like a normal WordPress plugin. If you w
 
 ## Running the Tests
 
-To run the whole test suite which includes PHPUnit unit tests, PHPCS code sniffs, PHPStan static analysis, and WordHat functional tests:
+To run the whole test suite:
 
 	composer test
 
-To run just the unit tests:
+To run just the integration tests:
 
-	composer test:ut
+	composer test:integration
 
-To run just the code sniffs:
+To run just the coding standards checks:
 
-	composer test:cs
+	composer test:phpcs
 
 To run just the static analysis:
 
 	composer test:phpstan
 
-To run just the functional tests:
+To run just the acceptance tests:
 
-	composer test:ft
+	composer test:acceptance
 
 ## Releasing a New Version
 

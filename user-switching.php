@@ -6,7 +6,7 @@
  * @package   user-switching
  * @link      https://github.com/Hive-IT-GmbH/user-switching/
  * @author    John Blackbourn <john@johnblackbourn.com>
- * @copyright 2009-2021 John Blackbourn
+ * @copyright 2009-2022 John Blackbourn
  * @license   GPL v2 or later
  *
  * Plugin Name:  User Switching
@@ -110,8 +110,14 @@ class user_switching {
 
 		?>
 		<tr class="user-switching-wrap">
-			<th scope="row"><?php echo esc_html_x( 'User Switching', 'User Switching title on user profile screen', 'user-switching' ); ?></th>
-			<td><a id="user_switching_switcher" href="<?php echo esc_url( $link ); ?>"><?php esc_html_e( 'Switch&nbsp;To', 'user-switching' ); ?></a></td>
+			<th scope="row">
+				<?php echo esc_html_x( 'User Switching', 'User Switching title on user profile screen', 'user-switching' ); ?>
+			</th>
+			<td>
+				<a id="user_switching_switcher" href="<?php echo esc_url( $link ); ?>">
+					<?php esc_html_e( 'Switch&nbsp;To', 'user-switching' ); ?>
+				</a>
+			</td>
 		</tr>
 		<?php
 	}
@@ -314,7 +320,7 @@ class user_switching {
 			}
 
 			?>
-			<div id="user_switching" class="updated notice is-dismissible">
+			<div id="user_switching" class="updated notice notice-success is-dismissible">
 				<?php
 					if ( $lang_attr ) {
 						printf(
@@ -379,7 +385,7 @@ class user_switching {
 			}
 		} elseif ( isset( $_GET['user_switched'] ) ) {
 			?>
-			<div id="user_switching" class="updated notice is-dismissible">
+			<div id="user_switching" class="updated notice notice-success is-dismissible">
 				<p>
 				<?php
 					if ( isset( $_GET['switched_back'] ) ) {
@@ -880,6 +886,7 @@ class user_switching {
 	 * Filters a user's capabilities so they can be altered at runtime.
 	 *
 	 * This is used to:
+	 *
 	 *  - Grant the 'switch_to_user' capability to the user if they have the ability to edit the user they're trying to
 	 *    switch to (and that user is not themselves).
 	 *  - Grant the 'switch_off' capability to the user if they can edit other users.
@@ -927,6 +934,7 @@ class user_switching {
 	 * Filters the required primitive capabilities for the given primitive or meta capability.
 	 *
 	 * This is used to:
+	 *
 	 *  - Add the 'do_not_allow' capability to the list of required capabilities when a Super Admin is trying to switch
 	 *    to themselves.
 	 *
